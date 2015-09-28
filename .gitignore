@@ -1,1 +1,5 @@
-# Will add stuff as it becomes necessary
+# Compiled source
+*.class
+/2015/fall/cs141/week1/nbproject/private/
+/2015/fall/cs141/week1/build/
+/2015/fall/cs141/week1/dist/
