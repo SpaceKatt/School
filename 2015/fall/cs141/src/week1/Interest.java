@@ -15,6 +15,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import java.util.Scanner;
+
 /**
  *
  * @author Thomas Kercheval
@@ -27,14 +29,20 @@ public class Interest
      */
     public static void main(String[] args) 
     {
-        double initial = 10000;
-        double bank = 10000;
+        Scanner scanner = new Scanner (System.in);
+        System.out.println("Starting amount: ");
+        double initial = scanner.nextDouble();
+        double bank = initial;
+        System.out.println("Goal: ");
+        double goal = scanner.nextDouble();
+        System.out.println("Interest rate: ");
+        double rate = scanner.nextDouble();
         for (int i = 1; i < 99999; i++) {
-            double interest = bank * 0.2;
+            double interest = bank * rate;
             System.out.println("Interest: " + interest);
             bank = bank + interest;
             System.out.println("Year# " + i);
-            if (bank / initial > 2) {
+            if (bank > goal) {
                 System.out.println("Final year: " + i);
                 System.out.println("Final bank value: " + bank);
                 break; 

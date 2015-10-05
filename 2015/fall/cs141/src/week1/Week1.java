@@ -14,6 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 package week1;
 
 /**
@@ -23,6 +24,7 @@ public class Week1 {
 
     /**
      * This little bit-lit prints some characters.
+     * @param args
      */
     public static void main(String[] args) {
         String name = "Thomas Kercheval";

@@ -15,6 +15,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+package week1;
+
 /**
  * This little bit-lit determines pi to six sig-figs,
  *     and no more.
