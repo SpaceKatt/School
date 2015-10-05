@@ -19,14 +19,23 @@ package week2;
 /**
  *
  * @author Thomas Kercheval
+ * 
  */
-public class Week2 {
+import java.util.Scanner;
 
+public class ValueCalculator {
+    
     /**
-     * @param args the command line arguments
+     * 
+     * @param args 
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        Scanner scanner = new Scanner (System.in);
+        System.out.println("Item price?");
+        double unitPrice = scanner.nextDouble();
+        System.out.println("How many items?");
+        int quantity = scanner.nextInt();
+        double totalCost = quantity * unitPrice;
+        System.out.printf("Total cost: " + totalCost);
     }
-    
 }

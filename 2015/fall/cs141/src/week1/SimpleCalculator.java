@@ -21,8 +21,8 @@ package week1;
  *
  * @author Thomas Kercheval
  */
-import java.util.*;
-
+import java.util.Scanner;
+import java.util.ArrayList;
 
 public class SimpleCalculator 
 {
@@ -34,8 +34,7 @@ public class SimpleCalculator
         cmdList.add("... 2 for multiplication,");
         cmdList.add("... 3 for subtraction.");
         cmdList.add("... 4 for division.");
-        for(String element : cmdList) // Enhanced for-loop
-        {
+        for(String element : cmdList) { // Enhanced for-loop
             System.out.println(element); // Print each element of cmdList
         }
         int operation = scanner.nextInt(); // Scanner looks for user int
@@ -49,15 +48,15 @@ public class SimpleCalculator
             Double result = first + second;
             System.out.print("First + Second = ");
             System.out.println(result);
-        } else if (operation == 2){ // If not 1... If 2... Then...
+        } else if (operation == 2) { // If not 1... If 2... Then...
             Double result = first * second;
             System.out.print("First * Second = ");
             System.out.println(result);
-        } else if (operation == 3){ // If not 1 or 2... If 3... Then...
+        } else if (operation == 3) { // If not 1 or 2... If 3... Then...
             Double result = first - second;
             System.out.print("First - Second = ");
             System.out.println(result);
-        } else if (operation == 4){
+        } else if (operation == 4) {
             Double result = first / second;
             System.out.print("First / Second = ");
             System.out.println(result);

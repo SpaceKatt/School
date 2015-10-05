@@ -75,7 +75,7 @@ public class Pi
         double[] values = new double[2]; // Declares an array, with two slots
             //// The slots in an array can be called elements of the array
         boolean infLoop = true;
-        while (infLoop){ 
+        while (infLoop) { 
             double newNegSum = negSum + (4 / ((4 * varx) - 1)); // Math
             double newPosSum = posSum + (4 / ((4 * varx) + 1)); // Math
                 /* These two lines above are terms in the infinite series
@@ -87,14 +87,13 @@ public class Pi
             
             if (compare(oldPi, currPi) & 
                (compare(newNegSum, negSum) ^ compare(newPosSum, posSum))
-               ) 
+               ) {
             /* The above if statement can be read as:
              *   IF the return value of compare(oldPi, currPi) is true,
              *   AND the retrun value of either compare(newNegSum, negSum)  
              *   OR compare(newPosSum, posSum) are true, then execute
              *   the following block of code...
              */
-            {
                 values[0] = currPi; // Put currPi in slot zero(0) of values
                 values[1] = varx;  // Make varx an element of values at one(1)
                 return values; /* This statement breaks the while loop.
