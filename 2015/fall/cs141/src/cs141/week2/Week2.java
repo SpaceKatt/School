@@ -14,28 +14,19 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package week2;
+package cs141.week2;
 
 /**
  *
  * @author Thomas Kercheval
- * 
  */
-import java.util.Scanner;
+public class Week2 {
 
-public class ValueCalculator {
-    
     /**
-     * 
-     * @param args 
+     * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Scanner scanner = new Scanner (System.in);
-        System.out.println("Item price?");
-        double unitPrice = scanner.nextDouble();
-        System.out.println("How many items?");
-        int quantity = scanner.nextInt();
-        double totalCost = quantity * unitPrice;
-        System.out.printf("Total cost: " + totalCost);
+        // TODO code application logic here
     }
+    
 }

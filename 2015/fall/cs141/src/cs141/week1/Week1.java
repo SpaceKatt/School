@@ -14,19 +14,25 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package week2;
+package cs141.week1;
 
 /**
- *
  * @author Thomas Kercheval
  */
-public class Week2 {
+public class Week1 {
 
     /**
-     * @param args the command line arguments
+     * This little bit-lit prints some characters.
+     * @param args
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        String name = "Thomas Kercheval";
+            for(int i = 0; i< name.length(); i++)
+            {
+                String letter = name.substring(i,i+1);
+                System.out.println(letter);
+            }
+        System.out.println("Greetings.");
     }
     
 }

@@ -1,4 +1,4 @@
-package week0;
+package cs141.week0;
 
 public class HelloPrinter
 {
