@@ -31,8 +31,7 @@ package cs141.week1;
  * 
  * @author Thomas Kercheval
  */
-public class Pi 
-{
+public class Pi {
     /**
      * The main() method here calls another method in the class,
      *     a loop (piLoop) to determine the values. piLoop then
@@ -53,8 +52,7 @@ public class Pi
      * 
      * @param args
      */
-    public static void main(String[] args) 
-    {
+    public static void main(String[] args) {
         double[] values = piLoop(); // piLoop is a method to determine pi
         double sixFigs = Math.floor(100000 * values[0]) / 100000;
             //// The line above this one makes the double prettier to print
@@ -64,8 +62,7 @@ public class Pi
         System.out.println(someString + values[1]);
     }
     
-    public static double[] piLoop()
-    {
+    public static double[] piLoop() {
         double varx = 1; // What we will use to tell which iteration we are on
         double consOne = 1; // ALWAYS one
         double oldPi = 1; // Our first term in the series
@@ -111,8 +108,7 @@ public class Pi
         return values; // This should never execute...
     }
 
-    public static boolean compare (double oldPi, double currPi) 
-    {
+    public static boolean compare (double oldPi, double currPi) {
         /* This method multiplies a double by 5-orders of magnitude,
          *     then truncates (removes) the remaining decimals.
          * We do this so we can tell if the first several digits are equal,

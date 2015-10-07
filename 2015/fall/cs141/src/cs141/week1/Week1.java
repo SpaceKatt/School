@@ -27,8 +27,7 @@ public class Week1 {
      */
     public static void main(String[] args) {
         String name = "Thomas Kercheval";
-            for(int i = 0; i< name.length(); i++)
-            {
+            for(int i = 0; i< name.length(); i++) {
                 String letter = name.substring(i,i+1);
                 System.out.println(letter);
             }
