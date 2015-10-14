@@ -47,6 +47,7 @@ public class TwelveBitChallenge {
 
 class TwelveBitChallengeSecret {
     private int count;    
+    private boolean zeroOne;
     
     /**
      * 
@@ -58,15 +59,29 @@ class TwelveBitChallengeSecret {
         //// Your answer goes here...
         
         //// Example of answer structure (this doesn't work)
-        if (compareValues(bits, "1,2,3,4,5,6", "7,8,9,10,11,12") == 0) {
-            
-        } else {
-            answer = 2;
+        if (compareValues(bits, "1,2,3,4,5", "7,8,9,10,11") == 0) {
+            // This runs if above comparison is equal
+            int returnValue = compareValues(bits, "6", "12");
+            if (returnValue == 1) {
+                answer = 6;
+            } else if (returnValue == 2) {
+                answer = 12;
+            }
+        } else { // This runs if 1,2,3,4,5 and 7,8,9,10,11 are not equal
+            if (compareValues(bits, "1,2,3", "8,7,6") == 0) {
+                answer = 1;
+            } else {
+                answer = 5;
+            }
         }
         //// END example, delete this and make your own!
         return answer;
     }
-    
+
+//////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////    
 //////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////
@@ -78,7 +93,10 @@ class TwelveBitChallengeSecret {
 //////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////
-
+//////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////
     /**
      * 
      * @param left
@@ -93,43 +111,71 @@ class TwelveBitChallengeSecret {
         String[] rightValues = right.split(",");
         int[] leftIndex = new int[leftValues.length];
         int[] rightIndex = new int[rightValues.length];
+        if (leftValues.length != rightValues.length) {
+            String stringOne = "If both inputs aren't of equal quantity then";
+            String stringTwo = " our comparison is meaningless... Try again!";
+            System.out.println("\n" + stringOne + stringTwo);
+            System.exit(0);
+        }
         
         //////// This section below is for printing and string parsing ///////
         System.out.println("\nMove number: " + returnTotal());
         System.out.println("We are currently comparing: ");
         for (int i = 0; i < leftValues.length; i++) {
             System.out.print(leftValues[i] + " ");
-            leftIndex[i] = Integer.parseInt(leftValues[i]) - 1;
+            leftIndex[i] = (Integer.parseInt(leftValues[i]) - 1);
+            //System.out.print("LeftInddexvalue: " + leftIndex[i] + " ");
         }
         System.out.print("to: ");
         for (int i = 0; i < rightValues.length; i++) {
             System.out.print(rightValues[i] + " ");
-            rightIndex[i] = Integer.parseInt(rightValues[i]) - 1;
+            rightIndex[i] = (Integer.parseInt(rightValues[i]) - 1);
+            //System.out.print("RightInddexvalue: " + rightIndex[i] + " ");
         }
         System.out.println("\nAnd the the result is: ");
         //////// This section above is for printing and string parsing ///////
         
         boolean first = bits[leftIndex[0]];
+        boolean firstEqual = true;
         boolean second = bits[rightIndex[0]];
+        boolean secondEqual = true;
         for (int i = 1; i < leftValues.length; i++) {
-            first = !(first ^ bits[leftIndex[i]]);
+            //System.out.println("Bit value " + bits[leftIndex[i]]);
+            if (first == bits[leftIndex[i]]) {
+                first = bits[leftIndex[i]];
+            } else if (first != bits[leftIndex[i]]) {
+                firstEqual = false;
+                break;
+            }
         }
         for (int i = 1; i < rightValues.length; i++) {
-            second = !(second ^ bits[rightIndex[i]]);
+            if (second == bits[rightIndex[i]]) {
+                second = bits[rightIndex[i]];
+            } else if (second != bits[rightIndex[i]]) {
+                secondEqual = false;
+                break;
+            }
         }
-        boolean combined = first & second;
-        
-        if (combined == true) {
+        boolean combined = firstEqual && secondEqual;
+        //System.out.println("\n" + firstEqual + secondEqual + combined);
+        boolean greaterThanOne = leftIndex.length > 1;
+        if (combined == true && first == second) {
             value = 0;
-        } else if (first == true) {
+        } else if (firstEqual == this.zeroOne && greaterThanOne) {
             value = 1;
-        } else if (second == true) {
+        } else if (secondEqual == this.zeroOne && greaterThanOne) {
             value = 2;
+        } else if (!greaterThanOne) {
+            if (first == true) {
+                value = 1;
+            } else if (second == true) {
+                value = 2;
+            }
         } else {
             System.out.println("Something weird has happened...");
             System.exit(0);
         }
-        
+        System.out.println(value);
         return value;
     }
 
@@ -140,7 +186,7 @@ class TwelveBitChallengeSecret {
     public void startChallenge() {
         this.count = 0;
         Random zeroOneGenerator = new Random();
-        boolean zeroOne = zeroOneGenerator.nextBoolean();
+        this.zeroOne = zeroOneGenerator.nextBoolean();
         boolean[] bits = new boolean[12];
         for (int i = 0; i < 12; i++) {
             bits[i] = zeroOne;
@@ -149,9 +195,10 @@ class TwelveBitChallengeSecret {
         System.out.println("Which bit did the teacher flip? ");
         int flippedBit = userInput.nextInt();
         if (flippedBit < 13 && flippedBit > 0) {
-            bits[flippedBit] = !zeroOne;
+            bits[flippedBit - 1] = !zeroOne;
         } else {
-            System.out.println("Pick a number 1-12 and start over!");
+            System.out.println("Pick a number 0-11 and start over!");
+            System.exit(0);
         }
         
         System.out.println("\nOur initial configuration is:");
