@@ -30,9 +30,14 @@ package cs141.week3;
  * The Challenge:
  *     You are given twelve bits. 
  *         1 or 0. (true or false)
- *     11 are true or false, one is the opposite of the others.
+ *     11 are all true or all false, and one is the opposite of the others.
  *     
- *     How do you determine which bit is different? 
+ *     How do you determine which bit is different?
+ * 
+ *     You must only use a few built-in java statements (detailed below),
+ *         and method provided by your teacher.
+ * 
+ *     You may only call the provided method a maximum of three times...
  * 
  *     The teacher also assigns the initial condition to be random.
  *         (i.e., the different bit might be true or false, as long
@@ -42,6 +47,18 @@ package cs141.week3;
  *     Rewrite the `solutionSteps` method to determine the correct answer.
  * 
  *     We are dealing with bits: "1,2,3,4,5,6,7,8,9,10,11,12"
+ * 
+ *     We many only call `compareValues(bits, "1,12,4", "9,5,10)` a maximum
+ *         of 3 times if we want our solution to be valid.
+ * 
+ *     Compare 2 sets of bits to each other, using the `compareValues` 
+ *         method detailed below. This method returns 0, 1, or 2.
+ *             0 - Both sides are equal
+ *             1 - The left string has more true bits
+ *             2 - The right string has more true bits
+ * 
+ *     An example of what the solution will look like has been provided for
+ *         you to write over.
  * 
  *     Use the code detailed in next section...
  * 
@@ -55,9 +72,9 @@ package cs141.week3;
  *     Google these if they are unclear: 
  *         google -> "if statement java"
  * 
- *     The defined method is as follows:
+ *                 The defined method is as follows:
  * 
- *     int returnValue = compareValues(bits, "1,2,3,4", "5,6,7,8")
+ *     `int returnValue = compareValues(bits, "1,2,3,4", "5,6,7,8")`
  *     
  *     The return value of this method can be one of the following three:
  *         0, which means that "1,2,3,4,5,6,7,8" are all equal
@@ -69,7 +86,12 @@ package cs141.week3;
  *         every call of this method.
  * 
  *     The second and third arguments are strings, which refer to which
- *         bits we are putting on which side of our evaluator.
+ *         bits we are putting on which side of our evaluator (left/right).
+ * 
+ *     Our strings, referring to the bits we are currently comparing,
+ *         must have an equal amount of numbers on each side. Our strings
+ *         must also be of exactly this form: "1,2,3,4" (though may contain
+ *         any numbers 1-12, in any order).
  * 
  *     The commas in between our numbers in our input string are
  *         vital, the code will break otherwise.
@@ -80,7 +102,13 @@ package cs141.week3;
  *     An example of solution structure has been provided...
  * 
  * Hints:
- *     Try it first, then check the hint at the end of this file~
+ *     Try it first, then check the hint at the very end of this file~
+ * 
+ *     If you are confused about what is going on, run the provided example
+ *         a few times. If you run this script, what is going on will be
+ *         printed to your output.
+ * 
+ *     Seriously, check the hint at the end of the file, if you get stuck.
  * 
  * @author Thomas Kercheval
  */
@@ -225,6 +253,11 @@ class TwelveBitChallengeSol {
      * The second and third arguments are strings, which refer to which
      *     bits we are putting on which side of our evaluator.
      * 
+     * Our strings, referring to the bits we are currently comparing,
+     *      must have an equal amount of numbers on each side. Our strings
+     *      must also be of exactly this form: "1,2,3,4" (though may contain
+     *      any numbers 1-12, in any order).
+     * 
      * The commas in between our numbers in our input string are
      *     vital, the code will break otherwise.
      * 
@@ -245,8 +278,8 @@ class TwelveBitChallengeSol {
             String stringOne = "If both inputs aren't of equal quantity then";
             String stringTwo = " our comparison is meaningless... Try again!";
             System.out.println("\n" + stringOne + stringTwo);
-            System.exit(0); // If both sides of comparison aren't equal, exit
-        }
+            System.exit(0); // If both sides of comparison aren't
+        }                   //     of equal length, exit.
         
         //////// This section below is for printing and string parsing ///////
         System.out.println("\nMove number: " + returnTotal());
@@ -254,18 +287,18 @@ class TwelveBitChallengeSol {
         for (int i = 0; i < leftValues.length; i++) {
             System.out.print(leftValues[i] + " ");
             leftIndex[i] = (Integer.parseInt(leftValues[i]) - 1);
-        }   //// Above line parses split sting into sequence of numbers
+        }   //// Above line parses split string into sequence of numbers
         System.out.print(":to: ");
         for (int i = 0; i < rightValues.length; i++) {
             System.out.print(rightValues[i] + " ");
             rightIndex[i] = (Integer.parseInt(rightValues[i]) - 1);
         }   //// Index will be used to call bits out of our bits array
-        System.out.println("\nAnd the the result is: ");
+        System.out.print("\nAnd the the result is: ");
         //////// This section above is for printing and string parsing ///////
         
         boolean first = bits[leftIndex[0]]; // Our first true/false for left
         boolean firstEqual = true; // Assume left is equal until proved false
-        boolean second = bits[rightIndex[0]];
+        boolean second = bits[rightIndex[0]]; // First true/false for right
         boolean secondEqual = true; // Assume right is equal until...
         for (int i = 1; i < leftValues.length; i++) {
             //System.out.println("Bit value " + bits[leftIndex[i]]);
@@ -305,8 +338,9 @@ class TwelveBitChallengeSol {
             }
         } else {
             System.out.println("Something weird has happened...");
-            System.exit(0);
+            System.exit(0); // Unexpected logic has occured, exit.
         }
+        System.out.println("Giving us a return value of: " + value);
         return value;
     }
 
@@ -370,3 +404,12 @@ class TwelveBitChallengeSol {
 
 // This is a java version of the 12 coins problem.
 // Google it, the logical steps in the problem's solution are well documented.
+// 
+// Though, instead of one side of the scale being heavier or lighter,
+//     one side of our evaluator is more true (which you can interpret as
+//                                             either heavier or lighter).
+// if (returnValue == heavier) {
+//     doThis
+// } else if (returnValue == lighter) { ...etc.              
+//
+// Remember to have fun! :D
